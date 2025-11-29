@@ -7,8 +7,10 @@ import (
 )
 
 var input = 10
+var startingTime = time.Time{}
 
 func Run() {
+	startingTime = time.Now()
 	maxIndex := maxRow() + 1
 	solvedTasks := make([]int, 0, maxIndex)
 	solvedTasks = append(solvedTasks, 0)
@@ -29,6 +31,7 @@ func Run() {
 		fmt.Println()
 		if input == 0 {
 			printSolvedExercises(solvedTasks)
+			fmt.Printf("You spent %v practicing exercises today\n", time.Since(startingTime).Truncate(time.Second).String())
 			fmt.Println("This program will terminate in 15 seconds.")
 			time.Sleep(15 * time.Second)
 
