@@ -1,3 +1,7 @@
 package config
 
-var FileName = "Exercises.xlsx"
+var (
+	ExercisesFileName = "Exercises.xlsx"
+	PrintingFileName  = "text_eng.json"
+	PrintingFilePath  = "pkg/text/"
+)

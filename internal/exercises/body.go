@@ -1,26 +1,45 @@
 package exercises
 
 import (
+	"exercises/pkg/text"
+	"exercises/pkg/utility"
 	"fmt"
 	"strconv"
 	"time"
 )
 
-var input = 10
-var startingTime = time.Time{}
+var Reset = "\033[0m"
+var Red = "\033[31m"
+var Green = "\033[32m"
+
+// var Yellow = "\033[33m"
+var Blue = "\033[34m"
+
+//var Magenta = "\033[35m"
+//var Cyan = "\033[36m"
+//var Gray = "\033[37m"
+//var White = "\033[97m"
+
+var (
+	SolvedTasksList []int
+	input           = 10
+	startingTime    = time.Time{}
+)
+
+//var taskStartingTime = time.Time{}
 
 func Run() {
 	startingTime = time.Now()
-	maxIndex := maxRow() + 1
-	solvedTasks := make([]int, 0, maxIndex)
-	solvedTasks = append(solvedTasks, 0)
+	maxIndex := maxExerciseRow() + 1
+	SolvedTasksList = make([]int, 0, maxIndex)
+	SolvedTasksList = append(SolvedTasksList, 0)
 	taskIndex := 0
 	moreExircises := true
 
 	for {
 		fmt.Println()
 		fmt.Println("-------------------------------------------")
-		fmt.Printf("Type 0 to exit, 1 to get random exercise:")
+		fmt.Printf(text.Print.GetExercise)
 
 		_, err := fmt.Scan(&input)
 		if err != nil {
@@ -30,31 +49,33 @@ func Run() {
 
 		fmt.Println()
 		if input == 0 {
-			printSolvedExercises(solvedTasks)
-			fmt.Printf("You spent %v practicing exercises today\n", time.Since(startingTime).Truncate(time.Second).String())
-			fmt.Println("This program will terminate in 15 seconds.")
+			printSolvedExercises(SolvedTasksList)
+			fmt.Printf(Blue+text.Print.SessionTimeAmount+"\n"+Reset, time.Since(startingTime).Truncate(time.Second).String())
+			fmt.Println(text.Print.Terminate)
 			time.Sleep(15 * time.Second)
 
 			break
 		} else if input == 1 {
-			solvedTasks, taskIndex, moreExircises = randomIndex(maxIndex, solvedTasks)
+			//taskStartingTime = time.Now()
+			SolvedTasksList, taskIndex, moreExircises = utility.RandomExerciseIndex(maxIndex, SolvedTasksList)
+
 			if moreExircises == false {
 				fmt.Println()
 				fmt.Println("-------------------------------")
-				fmt.Println("      Congratulations!")
-				fmt.Println("All exercises have been solved.")
+				fmt.Println("      " + Red + text.Print.Congratulation + Reset)
+				fmt.Println(Red + text.Print.AllExercisesSolved + Reset)
 				fmt.Println("-------------------------------")
 				fmt.Println()
-				fmt.Println("This program will terminate in 15 seconds.")
+				fmt.Println(text.Print.Terminate)
 				time.Sleep(15 * time.Second)
 				break
 			}
 
 			indexString := strconv.Itoa(taskIndex)
-			randomExercise(indexString)
+			randomExerciseFromExcel(indexString)
 
 		} else {
-			fmt.Println("Invalid input")
+			fmt.Println(text.Print.InvalidInput)
 			continue
 
 		}

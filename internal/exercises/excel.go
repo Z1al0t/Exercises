@@ -2,17 +2,16 @@ package exercises
 
 import (
 	"exercises/internal/config"
+	"exercises/pkg/text"
 	"fmt"
-	"math/rand"
-	"slices"
 
 	"github.com/xuri/excelize/v2"
 )
 
-// maxRow defines amount of Exercises in Excel file
-func maxRow() int {
+// maxExerciseRow defines amount of Exercises in Excel file
+func maxExerciseRow() int {
 
-	file, err := excelize.OpenFile(config.FileName)
+	file, err := excelize.OpenFile(config.ExercisesFileName)
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -35,31 +34,10 @@ func maxRow() int {
 	return result
 }
 
-// randomIndex gets random exercise which wasn't solved yet
-func randomIndex(m int, done []int) ([]int, int, bool) {
-	moreExercises := true
-	index := 0
-	for i := 0; i < m; i++ {
-		randIndex := rand.Intn(m)
-		if slices.Contains(done, randIndex) {
-			if len(done) == m {
-				moreExercises = false
-				break
-			}
-			i--
-			continue
-		}
-		done = append(done, randIndex)
-		index = randIndex
-		break
-	}
-	return done, index, moreExercises
-}
-
 // randomExercise prints random Exercise task
-func randomExercise(index string) {
+func randomExerciseFromExcel(index string) {
 
-	file, err := excelize.OpenFile(config.FileName)
+	file, err := excelize.OpenFile(config.ExercisesFileName)
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -112,9 +90,9 @@ func randomExercise(index string) {
 			if row[0] == index {
 				if j == 0 {
 					fmt.Println()
-					fmt.Println("-------------")
-					fmt.Printf("Exercise #%s.\n", row[0])
-					fmt.Println("-------------")
+					fmt.Println(Green + "-------------" + Reset)
+					fmt.Printf(Green+text.Print.ExerciseNumber+"\n"+Reset, row[0])
+					fmt.Println(Green + "-------------" + Reset)
 					continue
 				} else {
 					column := excelColumns[j]
@@ -136,6 +114,6 @@ func randomExercise(index string) {
 
 func printSolvedExercises(solved []int) {
 	amount := len(solved) - 1
-	fmt.Println("Solved Exercises:", amount)
+	fmt.Printf(Blue+text.Print.SolvedExerciseAmount+"\n"+Reset, amount)
 
 }
