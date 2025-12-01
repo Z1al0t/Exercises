@@ -111,9 +111,3 @@ func randomExerciseFromExcel(index string) {
 	}
 
 }
-
-func printSolvedExercises(solved []int) {
-	amount := len(solved) - 1
-	fmt.Printf(Blue+text.Print.SolvedExerciseAmount+"\n"+Reset, amount)
-
-}
