@@ -18,16 +18,18 @@ var (
 	// Magenta = "\033[35m"
 	// Cyan = "\033[36m"
 	// Gray = "\033[37m"
-	// White = "\033[97m"
+	White = "\033[97m"
 )
 
-func getInput() string {
+func getInput(lower bool) string {
 	var input string
+	fmt.Printf(White)
 	_, err := fmt.Scan(&input)
 	if err != nil {
 		fmt.Println("Error reading input:", err)
 		panic(err)
 	}
+	fmt.Printf(Reset)
 	if input == "" {
 		fmt.Println("Input cannot be blank")
 		panic(err)
@@ -35,7 +37,9 @@ func getInput() string {
 
 	input = strings.Replace(input, "\n", "", -1)
 	input = strings.TrimSpace(input)
-	input = strings.ToLower(input)
+	if lower {
+		input = strings.ToLower(input)
+	}
 	return input
 }
 
@@ -54,7 +58,7 @@ func PrintTerminalGetExercise() string {
 	fmt.Println()
 	fmt.Println("-------------------------------------------")
 	fmt.Printf(text.Print.GetExercise)
-	userInput := getInput()
+	userInput := getInput(true)
 	fmt.Printf("-------------------------------------------")
 	fmt.Println()
 	return userInput
@@ -85,4 +89,21 @@ func PrintTerminalExerciseNumber(number string) {
 	fmt.Println(Green + "-------------" + Reset)
 	fmt.Printf(Green+text.Print.ExerciseNumber+"\n"+Reset, number)
 	fmt.Println(Green + "-------------" + Reset)
+}
+
+func PrintTerminalGetName(name *string) {
+	fmt.Println(text.Print.EnterName)
+	*name = getInput(false)
+}
+
+func PrintTerminalGetSolvingStatus(solved *string, st time.Time, exercise string) {
+	fmt.Println()
+	fmt.Println("-------------------------------")
+	fmt.Printf(text.Print.ExerciseSolvingStatus)
+	*solved = getInput(true)
+	fmt.Println("-------------------------------")
+
+	fmt.Printf(Blue+text.Print.SolvedExerciseNumber+Reset, exercise, *solved)
+	timeSpend := time.Since(st).Truncate(time.Second).String()
+	fmt.Printf(Blue+text.Print.SolvedExerciseTime+Reset, timeSpend)
 }

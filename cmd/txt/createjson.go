@@ -13,16 +13,20 @@ func main() {
 	filePath := "pkg/text/"
 
 	myText := text.DisplayText{
-		Greeting:             "Welcome to the Exercises app!",
-		GetExercise:          "Type 0 to exit, 1 to get random exercise: ",
-		ExerciseTime:         "You spent %v for this exercise.",
-		InvalidInput:         "Invalid input!",
-		Congratulation:       "Congratulation!",
-		SolvedExerciseAmount: "You solved %d exercises at this session",
-		SessionTimeAmount:    "You spent %v practicing exercises today",
-		Terminate:            "This program will terminate in 15 seconds.",
-		AllExercisesSolved:   "All exercises have been solved.",
-		ExerciseNumber:       "Exercise #%s.",
+		Greeting:              "Welcome to the Exercises app!",
+		GetExercise:           "     Type your command: \n<exit> to quit \n<help> to see all commands \n<get>  to get random exercise\nCommand: ",
+		ExerciseTime:          "You spent %v for this exercise.",
+		InvalidInput:          "Invalid input!",
+		Congratulation:        "Congratulation!",
+		SolvedExerciseAmount:  "You solved %d exercises at this session",
+		SessionTimeAmount:     "You spent %v practicing exercises today",
+		Terminate:             "This program will terminate in 15 seconds.",
+		AllExercisesSolved:    "All exercises have been solved.",
+		ExerciseNumber:        "Exercise #%s.",
+		EnterName:             "Please enter your name:",
+		ExerciseSolvingStatus: "Please enter exercise solving status in percentage:\n<100> for fully solved\n<0> for not solved\n<50> for solved only half\nSolved: ",
+		SolvedExerciseNumber:  "Exercise #%s solved %s%%\n",
+		SolvedExerciseTime:    "You spent %v for this exercise.",
 	}
 
 	jsonText, err := json.Marshal(myText)

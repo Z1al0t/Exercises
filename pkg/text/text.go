@@ -9,17 +9,20 @@ import (
 )
 
 type DisplayText struct {
-	Greeting             string `json:"greeting"`
-	GetExercise          string `json:"get_exercise"`
-	ExerciseTime         string `json:"exercise_time"`
-	InvalidInput         string `json:"invalid_input"`
-	Congratulation       string `json:"congratulation"`
-	SolvedExerciseAmount string `json:"solved_exercise_amount"`
-	EnterName            string `json:"enter_name"`
-	SessionTimeAmount    string `json:"session_time_amount"`
-	Terminate            string `json:"terminate"`
-	AllExercisesSolved   string `json:"all_exercises_solved"`
-	ExerciseNumber       string `json:"exercise_number"`
+	Greeting              string `json:"greeting"`
+	GetExercise           string `json:"get_exercise"`
+	ExerciseTime          string `json:"exercise_time"`
+	InvalidInput          string `json:"invalid_input"`
+	Congratulation        string `json:"congratulation"`
+	SolvedExerciseAmount  string `json:"solved_exercise_amount"`
+	EnterName             string `json:"enter_name"`
+	SessionTimeAmount     string `json:"session_time_amount"`
+	Terminate             string `json:"terminate"`
+	AllExercisesSolved    string `json:"all_exercises_solved"`
+	ExerciseNumber        string `json:"exercise_number"`
+	ExerciseSolvingStatus string `json:"exercise_solving_status"`
+	SolvedExerciseNumber  string `json:"solved_exercise_number"`
+	SolvedExerciseTime    string `json:"solved_exercise_time"`
 }
 
 var Print DisplayText

@@ -13,15 +13,18 @@ import (
 var (
 	SolvedTasksList []int
 
-	startingTime = time.Time{}
+	startingTime     = time.Time{}
+	taskStartingTime = time.Time{}
+	name             string
 )
-
-//var taskStartingTime = time.Time{}
 
 func Run() {
 	startingTime = time.Now()
 	//ToDo add log-in log
 	output.PrintTerminalGreeting()
+
+	output.PrintTerminalGetName(&name)
+
 	maxIndex := maxExerciseRow() + 1
 	SolvedTasksList = make([]int, 0, maxIndex)
 	SolvedTasksList = append(SolvedTasksList, 0)
@@ -39,6 +42,7 @@ func Run() {
 			break
 		} else if userInput == "get" {
 			//Todo log starting exercise time
+			taskStartingTime = time.Now()
 			SolvedTasksList, taskIndex, moreExircises = utility.RandomExerciseIndex(maxIndex, SolvedTasksList)
 
 			if moreExircises == false {
@@ -48,6 +52,13 @@ func Run() {
 
 			indexString := strconv.Itoa(taskIndex)
 			randomExerciseFromExcel(indexString)
+
+			exerciseSolvedStatus := ""
+			output.PrintTerminalGetSolvingStatus(&exerciseSolvedStatus, taskStartingTime, indexString)
+
+		} else if userInput == "help" {
+			//Todo help menu
+			fmt.Println("This feature is not active at the moment, sorry.")
 
 		} else {
 			fmt.Println(text.Print.InvalidInput)
