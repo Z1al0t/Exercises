@@ -79,3 +79,10 @@ func PrintTerminalAllExercisesSolved() {
 	fmt.Println(text.Print.Terminate)
 	time.Sleep(15 * time.Second)
 }
+
+func PrintTerminalExerciseNumber(number string) {
+	fmt.Println()
+	fmt.Println(Green + "-------------" + Reset)
+	fmt.Printf(Green+text.Print.ExerciseNumber+"\n"+Reset, number)
+	fmt.Println(Green + "-------------" + Reset)
+}

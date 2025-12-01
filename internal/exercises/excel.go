@@ -2,7 +2,7 @@ package exercises
 
 import (
 	"exercises/internal/config"
-	"exercises/pkg/text"
+	"exercises/internal/output"
 	"fmt"
 
 	"github.com/xuri/excelize/v2"
@@ -89,10 +89,8 @@ func randomExerciseFromExcel(index string) {
 		for j, cell := range row {
 			if row[0] == index {
 				if j == 0 {
-					fmt.Println()
-					fmt.Println(Green + "-------------" + Reset)
-					fmt.Printf(Green+text.Print.ExerciseNumber+"\n"+Reset, row[0])
-					fmt.Println(Green + "-------------" + Reset)
+					exercise := row[0]
+					output.PrintTerminalExerciseNumber(exercise)
 					continue
 				} else {
 					column := excelColumns[j]
